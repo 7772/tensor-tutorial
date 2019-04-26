@@ -34,6 +34,25 @@ async function run() {
   );
 
   // More code will be added below
+  
+  // Create the model
+  const model = createModel();  
+  tfvis.show.modelSummary({name: 'Model Summary'}, model);
+}
+
+function createModel() {
+  // Create a sequential model
+  const model = tf.sequential(); 
+  
+  // Add a single hidden layer
+  // inputShape 는 입력의 층을 말한다. The inputShape is [1] because we have 1 number as our input (the horsepower of a given car).
+  model.add(tf.layers.dense({inputShape: [1], units: 1, useBias: true}));
+  
+  // Add an output layer
+  // We set units to 1 because we want to output 1 number.
+  model.add(tf.layers.dense({units: 1, useBias: true}));
+
+  return model;
 }
 
 document.addEventListener('DOMContentLoaded', run);
